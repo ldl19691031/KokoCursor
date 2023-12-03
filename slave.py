@@ -9,7 +9,6 @@ from PyQt5.QtGui import QPixmap, QColor, QPainter, QBrush
 from PyQt5.QtCore import Qt, QTimer
 
 from share import get_connection
-conn = get_connection()
 
 # Now you can use the connection to interact with the server
 # For example, you can call remote functions or access remote attributes
@@ -61,7 +60,7 @@ class TransparentWindow(QWidget):
         self.current_x, self.current_y = win32api.GetCursorPos()
         self.window().move(self.current_x, self.current_y)
         # Connect to the server
-        self.conn = rpyc.connect("localhost", 18861)
+        self.conn = get_connection()
         self.conn.root.add_slave(lambda key: self.init_connect(key))
 
         self.setMouseTracking(True)
